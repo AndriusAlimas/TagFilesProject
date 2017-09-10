@@ -34,3 +34,15 @@ has the name of the value of this varEntries attribute.--%>
 <%--This is the name of the exported variable, in which the tag stores the current day number of the month
 ( starting at 1, with maximum possible value of 31). --%>
 <%@ attribute name="varDay" required="true" rtexprvalue="false" description="Name for the day's exported number"%>
+
+<%--Then we declare the exported variables for this tag ;these have the names given by the varEntries and varDay
+attributes, and export String[] and Integer objects respectively --%>
+<%@ variable name-from-attribute="varEntries" alias="entries" variable-class="java.lang.String[]" scope="NESTED"
+description="Entries for the particular date"%>
+<%@ variable name-from-attribute="varDay" alias="daynum" variable-class="java.lang.Integer" scope="NESTED"
+description="Day of the month (1 up to 31)"%>
+
+<%-- Scriplet initialisation code: JSP scripting elements are valid as content in tag files, 
+     but not in the bodies of the actions they represent! --%>
+     
+     
