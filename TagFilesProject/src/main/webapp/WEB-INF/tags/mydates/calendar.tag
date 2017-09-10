@@ -70,5 +70,16 @@ description="Day of the month (1 up to 31)"%>
     int startofweek = (startofweekobj == null ? 1 : startofweekobj.intValue());
     jspContext.setAttribute("startofweek", startofweek);
     
+    /* The 'startcondition' is an offset; it represents the index of the cell 
+    just before the first cell to be filled. */
+    int startcondition = (startday - startofweek) % 7;
+    // if minus:
+    	if(startcondition < 0){
+    		startcondition += 7;
+    	}
+    /* The startcondition attribute stores the (1-BASED) index of the cell just before the cell at which the 1st of the 
+    month will be dispplayed.This is also the number of cells skipped (left empty) in the first row
     
+    */
+     jspContext.setAttribute("startcondition",startcondition);
      %>
