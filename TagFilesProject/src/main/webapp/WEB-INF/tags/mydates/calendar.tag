@@ -64,4 +64,11 @@ description="Day of the month (1 up to 31)"%>
     int startday = cal.get(Calendar.DAY_OF_WEEK);
     jspContext.setAttribute("startday", startday);
     		
+    /* Convert textual 'startofweek' value into number */
+    Integer startofweekobj = (Integer)jspContext.getAttribute("startofweek");
+    // if attribute wasn't declared ( remember OPTIONAL), we give it default value of 1 (Sunday)
+    int startofweek = (startofweekobj == null ? 1 : startofweekobj.intValue());
+    jspContext.setAttribute("startofweek", startofweek);
+    
+    
      %>
