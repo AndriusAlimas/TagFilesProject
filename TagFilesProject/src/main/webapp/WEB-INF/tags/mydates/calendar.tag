@@ -48,4 +48,10 @@ description="Day of the month (1 up to 31)"%>
      /* Obtain the year and month as ints from the page-scoped attributes */
      int year = ((Integer)jspContext.getAttribute("year")).intValue();
      int month = ((Integer)jspContext.getAttribute("month")).intValue();
+     
+     Calendar cal = Calendar.getInstance();
+     /* Set year and month (0 based) - default day to 1st of the month */
+     cal.set(year,month-1,1);
+     /* Store this in the page-scope to allow EL to access it */
+     jspContext.setAttribute("calendar", cal);
      %>
