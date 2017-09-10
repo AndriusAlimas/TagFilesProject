@@ -44,5 +44,8 @@ description="Day of the month (1 up to 31)"%>
 
 <%-- Scriplet initialisation code: JSP scripting elements are valid as content in tag files, 
      but not in the bodies of the actions they represent! --%>
-     
-     
+     <% 
+     /* Obtain the year and month as ints from the page-scoped attributes */
+     int year = ((Integer)jspContext.getAttribute("year")).intValue();
+     int month = ((Integer)jspContext.getAttribute("month")).intValue();
+     %>
