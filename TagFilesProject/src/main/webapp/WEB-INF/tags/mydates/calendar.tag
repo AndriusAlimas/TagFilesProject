@@ -58,4 +58,10 @@ description="Day of the month (1 up to 31)"%>
      // also in a local variable of the same name:
     int maxday = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
     jspContext.setAttribute("maxday", maxday);
+    
+    /* NOTE: Although we probably shouldn't rely on this, DAY_OF_WEEK takes the value 1 for Sunday,
+    2 for Monday ... up to 7 for Saturday. We will use this later */
+    int startday = cal.get(Calendar.DAY_OF_WEEK);
+    jspContext.setAttribute("startday", startday);
+    		
      %>
