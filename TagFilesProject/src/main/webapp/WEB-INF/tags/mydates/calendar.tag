@@ -54,4 +54,8 @@ description="Day of the month (1 up to 31)"%>
      cal.set(year,month-1,1);
      /* Store this in the page-scope to allow EL to access it */
      jspContext.setAttribute("calendar", cal);
+     // We obtain the maximum day in this specific month - a value between 28 and 30. We store this in the maxday attribute, and 
+     // also in a local variable of the same name:
+    int maxday = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+    jspContext.setAttribute("maxday", maxday);
      %>
