@@ -12,7 +12,7 @@ in the tag file. We do this with two taglib directives --%>
 implicit TLD. We then configure all the attributes for this tag file, using attribute directive for each: --%>
 
 <%-- an Integer specifying the year we want to display (e.g 2017) --%>
-<%@ attribute name="year" require="true" type="java.lang.Integer"  description="Year of calendar" %>
+<%@ attribute name="year" required="true" type="java.lang.Integer"  description="Year of calendar" %>
 
 <%-- an Integer specifying the month to be display; January has index 1, December is 12 --%>
 <%@ attribute name="month" required="true" type="java.lang.Integer" description="Month of calendar"%>
