@@ -109,6 +109,25 @@ description="Day of the month (1 up to 31)"%>
      	<%-- Output the headings - this could also be formatted for different languages using another 
        custom or JSTL action --%>
        
+       <%-- Next we render the day headings -we've used hardcoded abbreviations like 'Su' (Sunday), 'Tu' (Tuesday),
+       and 'Th' (Thursday). The order in which these are displayed depends on which day the user has configured to be 
+       start of the week - as found in the startofweek attribute. We use modular arithmetic so that 8 becomes 1,
+       9 becomes 2 etc. in the loop, which simplifies the code. --%>
+       <tr>
+       <c:forEach begin="${startofweek}" end="${startofweek +6}" var="counter">
+       		<th>
+       		<c:choose>
+       			<c:when test="${counter % 7 == 1 }">Su</c:when>
+       			<c:when test="${counter % 7 == 2 }">M</c:when>
+       			<c:when test="${counter % 7 == 3 }">Tu</c:when>
+       			<c:when test="${counter % 7 == 4 }">W</c:when>
+       			<c:when test="${counter % 7 == 5 }">Th</c:when>
+       			<c:when test="${counter % 7 == 6 }">F</c:when>
+       			<c:when test="${counter % 7 == 7 }">Sa</c:when>
+       		</c:choose>
+       		</th>
+       </c:forEach>
+       </tr>
        
      </table>
 
