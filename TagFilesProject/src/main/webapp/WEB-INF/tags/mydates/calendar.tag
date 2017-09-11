@@ -123,7 +123,7 @@ description="Day of the month (1 up to 31)"%>
        			<c:when test="${counter % 7 == 4 }">W</c:when>
        			<c:when test="${counter % 7 == 5 }">Th</c:when>
        			<c:when test="${counter % 7 == 6 }">F</c:when>
-       			<c:when test="${counter % 7 == 7 }">Sa</c:when>
+       			<c:when test="${counter % 7 == 0 }">Sa</c:when>
        		</c:choose>
        		</th>
        </c:forEach>
