@@ -140,8 +140,17 @@ description="Day of the month (1 up to 31)"%>
         <%-- Only invoke the body if this is a valid day (non-empty cell) --%>
         <c:if test="${counter > startcondition && counter <= (maxday + startcondition) }">
         	<%-- Configure the variables for this date, then invoke the body --%>
-        
+        	<c:set var="daynum" value="${counter - startcondition }" />
+        	<c:set var="entries" value="${diary[daynum]}"/>
+        	<jsp:doBody />
         </c:if>
+        
+        <td>
+        
+         <%-- If we are at the end of a week, end this row --%>
+   			 <c:if test="${ counter % 7 == 0 }">
+     			 <jsp:text><![CDATA[</tr>]]></jsp:text>
+   			 </c:if>
+        
        </c:forEach>
      </table>
-
