@@ -82,4 +82,20 @@ description="Day of the month (1 up to 31)"%>
     
     */
      jspContext.setAttribute("startcondition",startcondition);
+    
+     /* We need to calculate the final cell number - this is the 'maxday + startconditon' rounded
+     to the next highest multiple of 7 */
+     int maxcount = maxday + startcondition; 
+     if(maxcount % 7 != 0){
+    	 maxcount += 7 - (maxcount % 7);
+     }
+     jspContext.setAttribute("maxcount", maxcount);
+     
      %>
+     
+     <%-- NOTE: Other than comments, no JSP scripting elements follow. We could therefore
+     offload all the previous scripting code into a helper class/servlet, leaving this tag file as a 
+     purely scriptless JSP (using EL rather than scripting elements). --%>
+     
+     
+
