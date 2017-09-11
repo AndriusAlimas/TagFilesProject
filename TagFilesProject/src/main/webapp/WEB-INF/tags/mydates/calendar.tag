@@ -129,5 +129,15 @@ description="Day of the month (1 up to 31)"%>
        </c:forEach>
        </tr>
        
+       <%-- Generates the cells in the table (starting top-left with index 1) --%>
+       <c:forEach begin="1" end="${maxcount}" step="1" var="counter" >
+        <%-- If we are at the start of a new week, start a new row --%>
+        <c:if test="${counter % 7  == 1}">
+        	<jsp:text><![CDATA[<tr>]]></jsp:text>
+        </c:if>
+        
+        <td>
+        
+       </c:forEach>
      </table>
 
