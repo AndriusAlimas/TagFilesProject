@@ -137,7 +137,11 @@ description="Day of the month (1 up to 31)"%>
         </c:if>
         
         <td>
+        <%-- Only invoke the body if this is a valid day (non-empty cell) --%>
+        <c:if test="${counter > startcondition && counter <= (maxday + startcondition) }">
+        	<%-- Configure the variables for this date, then invoke the body --%>
         
+        </c:if>
        </c:forEach>
      </table>
 
