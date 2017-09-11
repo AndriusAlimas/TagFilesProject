@@ -14,11 +14,12 @@
 			 diary[18] = new String[]{"Business meeting"};
 			 pageContext.setAttribute("myplans", diary);
 %>
+<%-- Obtain the year from a request parameter, or 2006 by default --%>
+<<c:set var="year" value="${(empty param['year']) ? 2006 : param['year'] }" />
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
+        <title>Calendars for year ${ year }</title>
+    </head> 
     <body>
         <h1>Hello World!</h1>
     </body>
