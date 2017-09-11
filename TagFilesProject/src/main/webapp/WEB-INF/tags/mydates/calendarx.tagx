@@ -1,0 +1,89 @@
+<jsp:root xmlns="http://www.w3.org/1999/xhtml" 
+          xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:fmt="http://java.sun.com/jsp/jstl/fmt">
+
+<jsp:directive.tag import="java.util.Calendar" />
+
+<jsp:directive.attribute name="year" required="true" type="java.lang.Integer" description="Year of calendar" />
+<jsp:directive.attribute name="month" required="true" type="java.lang.Integer" description="Month of calendar" />
+<jsp:directive.attribute name="diary" required="true" type="java.lang.String[][]" description="String[] entries for each day" />
+<jsp:directive.attribute name="startofweek" required="false" type="java.lang.Integer" description="Number for the start day (Sunday=1, Monday=2, ..., Saturday=7)" />
+<jsp:directive.attribute name="varEntries" required="true" rtexprvalue="false" description="Name for each day's exported entries" />
+<jsp:directive.attribute name="varDay" required="true" rtexprvalue="false" description="Name for the day's exported number" />
+
+<jsp:directive.variable name-from-attribute="varEntries" alias="entries" variable-class="java.lang.String[]" scope="NESTED" description="Entries for the particular date" />
+<jsp:directive.variable name-from-attribute="varDay" alias="daynum" variable-class="java.lang.Integer" scope="NESTED" description="Entries for the particular date" />
+
+<jsp:scriptlet><![CDATA[ 
+  int year = ((Integer)jspContext.getAttribute("year")).intValue();
+  int month = ((Integer)jspContext.getAttribute("month")).intValue();
+
+  Calendar cal = Calendar.getInstance();
+  cal.set(year, month-1, 1);
+
+  jspContext.setAttribute("calendar", cal);
+  int maxday = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+  jspContext.setAttribute("maxday", maxday);
+
+  int startday = cal.get(Calendar.DAY_OF_WEEK);
+  jspContext.setAttribute("startday", startday);
+
+  Integer startofweekobj = (Integer) jspContext.getAttribute("startofweek");
+  int startofweek = (startofweekobj == null ? 1 : startofweekobj.intValue());
+  jspContext.setAttribute("startofweek", startofweek);
+
+  int startcondition = (startday - startofweek) % 7;
+  if(startcondition < 0) {
+    startcondition += 7;
+  }
+  jspContext.setAttribute("startcondition", startcondition);
+
+  int maxcount = maxday + startcondition;
+  if(maxcount % 7 != 0) {
+      maxcount += 7 - (maxcount % 7);
+  }
+  jspContext.setAttribute("maxcount", maxcount);
+]]></jsp:scriptlet>
+
+
+<table>
+  <tr><th colspan="7"><fmt:formatDate value="${ calendar.time }" pattern="MMMMMMMMM yyyy" /></th></tr>
+  <tr>
+    <c:forEach begin="${ startofweek }" end="${ startofweek + 6 }" var="counter">
+      <th>
+        <c:choose>
+          <c:when test="${ counter % 7 == 1 }">Su</c:when>
+          <c:when test="${ counter % 7 == 2 }">M</c:when>
+          <c:when test="${ counter % 7 == 3 }">Tu</c:when>
+          <c:when test="${ counter % 7 == 4 }">W</c:when>
+          <c:when test="${ counter % 7 == 5 }">Th</c:when>
+          <c:when test="${ counter % 7 == 6 }">F</c:when>
+          <c:when test="${ counter % 7 == 0 }">Sa</c:when>
+        </c:choose>
+      </th>
+    </c:forEach>
+  </tr>
+
+  <c:forEach begin="1" end="${ maxcount }" step="1" var="counter">
+    <c:if test="${ counter % 7 == 1 }">
+      <jsp:text><![CDATA[<tr>]]></jsp:text>
+    </c:if>
+
+    <td>
+
+    <c:if test="${ counter gt startcondition and counter le (maxday + startcondition) }">
+      <c:set var="daynum" value="${ counter - startcondition }" />
+      <c:set var="entries" value="${ diary[daynum] }" />
+      <jsp:doBody />
+    </c:if>
+
+    </td>
+
+    <c:if test="${ counter % 7 == 0 }">
+      <jsp:text><![CDATA[</tr>]]></jsp:text>
+    </c:if>
+  </c:forEach>
+</table>
+
+</jsp:root>
