@@ -97,5 +97,18 @@ description="Day of the month (1 up to 31)"%>
      offload all the previous scripting code into a helper class/servlet, leaving this tag file as a 
      purely scriptless JSP (using EL rather than scripting elements). --%>
      
+     <%-- the first row of the table, which specifies the month and year. We use the getTime() method of Calendar
+     (invoked by the property access expression ${calendar.time})  to obtain a Date object which we pass to the JSTL
+     <fmt:formatDate /> action. --%>
      
+     <table>
+     	<tr><th colspan="7">
+     	<fmt:formatDate value="${calendar.time}" pattern="MMMMMMMMM yyyy"/>
+     	</th></tr>
+     	
+     	<%-- Output the headings - this could also be formatted for different languages using another 
+       custom or JSTL action --%>
+       
+       
+     </table>
 
