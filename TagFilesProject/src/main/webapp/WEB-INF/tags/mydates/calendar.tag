@@ -145,7 +145,7 @@ description="Day of the month (1 up to 31)"%>
         	<jsp:doBody />
         </c:if>
         
-        <td>
+        </td>
         
          <%-- If we are at the end of a week, end this row --%>
    			 <c:if test="${ counter % 7 == 0 }">
