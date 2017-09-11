@@ -42,6 +42,24 @@
        		<input type="submit" />
        </form>
        
+       <%--Show the 12 months --%>
+       <c:forEach begin="1" end="12" var="thisMonth">
+       	<dates:calendar year="${year}"  month="${thisMonth}"  diary="${myplans}" varDay="todayNum"
+       	 varEntries="dayEntries" startofweek="${(empty param['weekbegins']) ? 1 : param['weekbegins'] }">
+       	 
+       	 <%--Note that splitting the <span> opening element is BAD document syntax, but valid for a page --%>
+       	 <span 
+       	 <c:if test="${ !(empty dayEntries) }">
+       	  style="background-color:yellow;"
+       	 </c:if>
+       	 >
+       	 <a href="?year=${param['year'] }&month=${thisMonth}">
+       	 		${todayNum }
+       	 </a>
+       	 </span>
+       	 
+      </dates:calendar>
+     </c:forEach>
        
     </body>
     
