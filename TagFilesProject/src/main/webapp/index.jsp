@@ -15,13 +15,19 @@
 			 pageContext.setAttribute("myplans", diary);
 %>
 <%-- Obtain the year from a request parameter, or 2006 by default --%>
-<<c:set var="year" value="${(empty param['year']) ? 2006 : param['year'] }" />
+<c:set var="year" value="${(empty param['year']) ? 2006 : param['year'] }" />
 <html>
     <head>
         <title>Calendars for year ${ year }</title>
+        <%-- we making style for table and table cell --%>
+        <style>
+        	table {border-collapse: collapse; border: solid black 0.5pt;}
+        	table td {width: 12pt; height: 12pt; border: solid black 0.5pt;}
+        </style>       
     </head> 
+    
     <body>
-        <h1>Hello World!</h1>
+       
     </body>
     
 </html>
