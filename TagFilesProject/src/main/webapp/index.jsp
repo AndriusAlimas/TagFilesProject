@@ -60,7 +60,17 @@
        	 
       </dates:calendar>
      </c:forEach>
-       
+      
+      <%-- The main calendar --%>
+    <dates:calendarx year="${ param['year'] }" month="${ param['month'] }" diary="${ myplans }" 
+    varDay="todayNum" varEntries="dayEntries">
+  		<h3>${ todayNum }</h3>
+  <c:if test="${ !(empty dayEntries) }">
+    <c:forEach items="${ dayEntries }" var="thisEntry">
+      ${ thisEntry },
+    </c:forEach>
+  </c:if>
+  </dates:calendarx>
+
     </body>
-    
 </html>
